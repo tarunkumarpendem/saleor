@@ -1,23 +1,20 @@
-pipeline {
-    agent any
-    triggers {
-        pollSCM('* * * * *')
+pipeline{
+    agent{
+        label 'test'
     }
-    stages {
-        stage('vcs') {
-            steps {
-                git branch: 'main', url: 'https://github.com/WorkshopsByKhaja/saleor.git'
+    stages{
+        stage('clone'){
+            steps{
+                git url: 'https://github.com/tarunkumarpendem/saleor.git',
+                    branch: 'main'
             }
         }
-        stage('docker image build') {
-            steps {
-                sh 'docker image build -t shaikkhajaibrahim/saleor:DEV .'
+        stage('docker_image_build'){
+            steps{
+                sh 'docker image build -t saleor-core:dev .'
+                sh 'docker image tag saleor:dev tarunkumarpendem/saleor-core:dev'
+                sh 'docker image push tarunkumarpendem/saleor-core:dev'
             }
         }
-        stage('push image to registry') {
-            steps {
-                sh 'docker image push shaikkhajaibrahim/saleor:DEV'
-            }
-        }
-    }
+    } 
 }
