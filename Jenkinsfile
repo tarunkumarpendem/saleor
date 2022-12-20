@@ -9,7 +9,7 @@ pipeline{
                     branch: 'main'
             }
         }
-        stage('docker_image_build'){
+        stage('docker_image_build and push'){
             steps{
                 sh 'docker image build -t saleor-core:dev .'
                 sh 'docker image tag saleor:dev tarunkumarpendem/saleor-core:dev'
