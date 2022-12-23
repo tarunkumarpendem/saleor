@@ -25,14 +25,8 @@ pipeline{
                 label 'eks-cluster'
             }
             steps{
-                git url: 'https://github.com/hashicorp/learn-terraform-provision-eks-cluster'
-            }
-        }
-        stage('cluster-node_configure'){
-            agent{
-                label 'eks-cluster'
-            }
-            steps{
+                sh 'git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster'
+                sh 'cd learn-terraform-provision-eks-cluster'
                 sh 'terraform init && terraform apply -auto-approve'
                 sh 'aws eks --region $(terraform output -raw region) update-kubeconfig \
                     --name $(terraform output -raw cluster_name)'
