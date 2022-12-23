@@ -13,7 +13,7 @@ pipeline{
                     branch: 'main'
             }
         }
-        stage('docker_image_build and push'){
+        /*stage('docker_image_build and push'){
             agent{
                 label 'node-1'
             }
@@ -22,7 +22,7 @@ pipeline{
                 sh 'docker image tag saleor-core:DEV3 tarunkumarpendem/saleor-core:DEV3'
                 sh 'docker image push tarunkumarpendem/saleor-core:DEV3' 
             }
-        }
+        }*/
         stage('eks_cluster'){
             agent{
                 label 'eks-cluster'
