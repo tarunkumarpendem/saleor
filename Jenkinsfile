@@ -15,9 +15,9 @@ pipeline{
                 label 'node-1'
             }
             steps{
-                sh 'docker image build -t saleor-core:DEV1 .'
-                sh 'docker image tag saleor-core:DEV1 tarunkumarpendem/saleor-core:DEV1'
-                sh 'docker image push tarunkumarpendem/saleor-core:DEV1'
+                sh 'docker image build -t saleor-core:DEV2 .'
+               /* sh 'docker image tag saleor-core:DEV2 tarunkumarpendem/saleor-core:DEV2'
+                sh 'docker image push tarunkumarpendem/saleor-core:DEV2' */
             }
         }
         stage('eks_cluster'){
