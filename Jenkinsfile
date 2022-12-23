@@ -15,9 +15,9 @@ pipeline{
                 label 'node-1'
             }
             steps{
-                sh 'docker image build -t saleor-core:DEV2 .'
-               /* sh 'docker image tag saleor-core:DEV2 tarunkumarpendem/saleor-core:DEV2'
-                sh 'docker image push tarunkumarpendem/saleor-core:DEV2' */
+                sh 'docker image build -t saleor-core:DEV3 .'
+                sh 'docker image tag saleor-core:DEV3 tarunkumarpendem/saleor-core:DEV3'
+                sh 'docker image push tarunkumarpendem/saleor-core:DEV3' 
             }
         }
         stage('eks_cluster'){
@@ -27,9 +27,9 @@ pipeline{
             steps{
                 sh """git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
                       cd learn-terraform-provision-eks-cluster
-                      terraform init && terraform apply -auto-approve"""
-                sh 'aws eks --region $(terraform output -raw region) update-kubeconfig \
-                    --name $(terraform output -raw cluster_name)'
+                      terraform init && terraform destroy -auto-approve && terraform apply -auto-approve
+                      aws eks --region $(terraform output -raw region) update-kubeconfig \
+                      --name $(terraform output -raw cluster_name)"""
             }
         }
     } 
