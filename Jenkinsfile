@@ -1,4 +1,7 @@
 pipeline{
+    triggers{
+        pollSCM('* * * * *')
+    }
     agent any
     stages{
         stage('clone'){
@@ -26,10 +29,8 @@ pipeline{
             }
             steps{
                 sh """git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
-                      cd learn-terraform-provision-eks-cluster
-                      terraform init && terraform destroy -auto-approve && terraform apply -auto-approve
-                      aws eks --region $(terraform output -raw region) update-kubeconfig \
-                      --name $(terraform output -raw cluster_name)"""
+                      cd /learn-terraform-provision-eks-cluster
+                      terraform init && terraform destroy -auto-approve"""
             }
         }
     } 
