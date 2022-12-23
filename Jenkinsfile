@@ -4,7 +4,7 @@ pipeline{
         stage('clone'){
             agent{
                  label 'node-1'
-        }
+            }
             steps{
                 git url: 'https://github.com/tarunkumarpendem/saleor.git',
                     branch: 'main'
@@ -16,7 +16,7 @@ pipeline{
             }
             steps{
                 sh 'docker image build -t saleor-core:dev1 .'
-                sh 'docker image tag saleor:dev tarunkumarpendem/saleor-core:dev1'
+                sh 'docker image tag saleor:dev1 tarunkumarpendem/saleor-core:dev1'
                 sh 'docker image push tarunkumarpendem/saleor-core:dev1'
             }
         }
