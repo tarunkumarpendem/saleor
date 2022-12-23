@@ -16,7 +16,7 @@ pipeline{
             }
             steps{
                 sh 'docker image build -t saleor-core:dev1 .'
-                sh 'docker image tag saleor:dev1 tarunkumarpendem/saleor-core:dev1'
+                sh 'docker image tag saleor-core:dev1 tarunkumarpendem/saleor-core:dev1'
                 sh 'docker image push tarunkumarpendem/saleor-core:dev1'
             }
         }
