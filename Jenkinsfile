@@ -25,9 +25,9 @@ pipeline{
                 label 'eks-cluster'
             }
             steps{
-                sh 'git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster'
-                sh 'cd learn-terraform-provision-eks-cluster'
-                sh 'terraform init && terraform destroy -auto-approve'
+                sh """git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
+                      cd learn-terraform-provision-eks-cluster
+                      terraform init && terraform apply -auto-approve"""
                 sh 'aws eks --region $(terraform output -raw region) update-kubeconfig \
                     --name $(terraform output -raw cluster_name)'
             }
