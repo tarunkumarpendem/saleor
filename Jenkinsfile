@@ -9,7 +9,7 @@ pipeline{
             }
             steps{
                 git url: 'https://github.com/tarunkumarpendem/saleor.git',
-                    branch: 'main'
+                    branch: 'dev'
             }
         }
         stage('docker_image_build and push'){
