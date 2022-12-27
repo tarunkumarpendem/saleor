@@ -2,6 +2,7 @@ pipeline{
     triggers{
         pollSCM('* * * * *')
     }
+    agent any
     stages{
         stage('clone'){
             agent{
