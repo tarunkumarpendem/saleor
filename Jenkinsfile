@@ -2,7 +2,6 @@ pipeline{
     triggers{
         pollSCM('* * * * *')
     }
-    agent any
     stages{
         stage('clone'){
             agent{
@@ -13,25 +12,16 @@ pipeline{
                     branch: 'main'
             }
         }
-        /*stage('docker_image_build and push'){
+        stage('docker_image_build and push'){
             agent{
                 label 'node-1'
             }
             steps{
-                sh 'docker image build -t saleor-core:DEV3 .'
-                sh 'docker image tag saleor-core:DEV3 tarunkumarpendem/saleor-core:DEV3'
-                sh 'docker image push tarunkumarpendem/saleor-core:DEV3' 
-            }
-        }*/
-        stage('eks_cluster'){
-            agent{
-                label 'eks-cluster'
-            }
-            steps{
-                sh """git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
-                      cd /learn-terraform-provision-eks-cluster
-                      terraform init && terraform destroy -auto-approve"""
+                sh """docker image build -t saleor-core:dev-1.0 .
+                      docker image tag saleor-core:dev-1.0 tarunkumarpendem/saleor-core:dev-1.0
+                      docker image push tarunkumarpendem/saleor-core:dev-1.0
+                    """ 
             }
         }
-    } 
+    }
 }
